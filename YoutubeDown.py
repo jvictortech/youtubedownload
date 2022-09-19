@@ -11,7 +11,7 @@ from pytube import YouTube
 #INTERFACE
 janela = Tk()
 
-janela.geometry('320x300')
+janela.geometry('400x300')
 janela.configure(background='#dde')
 
 janela.title('Download Youtube')
@@ -27,6 +27,15 @@ texto_orientacao2 = Label(janela, text= 'Insira o caminho da pasta onde deseja s
 texto_orientacao.grid(column=0 ,row=2)
 texto_orientacao2.grid(column=0, row=4)
 
+texto_tela = Label(janela, text= '')
+texto_tela.grid(column=0, row=7)
+
+texto_tela2 = Label(janela, text= '')
+texto_tela2.grid(column=0, row=8)
+
+texto_tela3 = Label(janela, text='')
+texto_tela3.grid(column=0, row=9)
+
 caixa_texto= Entry(janela)
 caixa_texto.grid(column=0, row=3)
 caixa_texto2= Entry(janela)
@@ -39,9 +48,7 @@ var = str(caixa_texto)
 def iniciar():
 
     yt = YouTube(caixa_texto.get())
-
-    #print(caixa_texto.get('1.0', 'end-1c'))
-
+    
     result = {
         'Titulo': yt.title,
         'Número de views': yt.views,
@@ -52,12 +59,17 @@ def iniciar():
 
     ys = yt.streams.get_highest_resolution()
 
-    print(result)
-    print('Seu vídeo está sendo baixado...')
+    texto1 = f'O video escolhido foi: {result}'
+    texto2 = f'Aguarde Seu vídeo está sendo baixado..'
+
+    texto_tela['text'] = texto1
+    texto_tela2['text'] = texto2
+
 
     def baixar(): 
         ys.download(str (caixa_texto2.get()))
-        print('Donwload concluído com sucesso!')
+        texto3 = f'Seu Donwload foi concluído com sucesso'
+        texto_tela3['text'] = texto3
 
     baixar()
 
